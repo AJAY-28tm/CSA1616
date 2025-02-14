@@ -1,0 +1,7 @@
+# Load dataset
+data("AirPassengers")
+
+# Plot histogram with bins of width 150, starting at 100
+hist(AirPassengers, breaks = seq(100, 700, by = 150), 
+     col = "lightblue", main = "Histogram of AirPassengers", 
+     xlab = "Passengers", ylab = "Frequency", border = "black")
