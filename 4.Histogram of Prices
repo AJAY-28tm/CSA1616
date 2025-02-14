@@ -1,0 +1,41 @@
+# Given data
+prices <- c(1, 1, 5, 5, 5, 5, 5, 8, 8, 10, 10, 10, 10, 12, 14, 14, 14, 15, 15, 15, 15, 15, 
+            15, 18, 18, 18, 18, 18, 0, 20, 20, 20, 20, 20, 21, 21, 21, 21, 25, 25, 25, 25, 
+            25, 28, 28, 30)
+
+# Step 1: Sorting the data
+prices <- sort(prices)
+
+# Step 2: Equal-Frequency Binning
+num_bins <- 4  # Define the number of bins
+bin_size <- length(prices) / num_bins  # Compute bin size
+
+# Creating bins using quantile-based splitting
+bins <- split(prices, ceiling(seq_along(prices) / bin_size))
+
+# Print bins
+print("Equal-Frequency Bins:")
+print(bins)
+
+# Step 3a: Data Smoothing using Bin Means
+bin_means <- sapply(bins, mean)  # Compute bin means
+
+# Replace each value in a bin with its mean
+smoothed_by_means <- unlist(lapply(seq_along(bins), function(i) rep(bin_means[i], length(bins[[i]]))))
+
+print("Smoothed Data using Bin Means:")
+print(smoothed_by_means)
+
+# Step 3b: Data Smoothing using Bin Boundaries
+smoothed_by_boundaries <- unlist(lapply(bins, function(bin) {
+  min_val <- min(bin)
+  max_val <- max(bin)
+  sapply(bin, function(x) ifelse(abs(x - min_val) < abs(x - max_val), min_val, max_val))
+}))
+
+print("Smoothed Data using Bin Boundaries:")
+print(smoothed_by_boundaries)
+
+# Step 4: Plot Histogram
+hist(prices, breaks = num_bins, col = "lightblue", main = "Histogram of Prices", 
+     xlab = "Price", ylab = "Frequency", border = "black")
