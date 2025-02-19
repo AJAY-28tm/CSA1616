@@ -1,0 +1,33 @@
+# Install necessary package if not installed
+if(!require(arules)) install.packages("arules", dependencies=TRUE)
+library(arules)
+
+# Define transactions as a list
+transactions <- list(
+  c("M", "O", "N", "K", "E", "Y"),
+  c("D", "O", "N", "K", "E", "Y"),
+  c("M", "A", "K", "E"),
+  c("M", "U", "C", "K", "Y"),
+  c("C", "O", "O", "K", "I", "E")
+)
+
+# Convert to transaction format
+trans <- as(transactions, "transactions")
+
+# Display transactions
+inspect(trans)
+
+# Apply Apriori Algorithm with min support = 50% (2 transactions) and min confidence = 80%
+rules <- apriori(trans, parameter = list(supp = 2/length(trans), conf = 0.8))
+
+# Show the generated association rules
+inspect(rules)
+
+# Maximum Number of Association Rules
+max_rules <- length(rules)
+print(paste("Maximum Number of Association Rules:", max_rules))
+
+# Maximum Size of Frequent Itemsets
+itemsets <- apriori(trans, parameter = list(target="frequent itemsets", supp=2/length(trans)))
+max_size <- max(size(itemsets))
+print(paste("Maximum Size of Frequent Itemsets:", max_size))
