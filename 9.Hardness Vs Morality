@@ -1,0 +1,25 @@
+# Install and load the HSAUR package
+install.packages("HSAUR")
+library(HSAUR)
+
+# Load the 'water' dataset
+data("water")
+
+# Display the first few rows of the dataset
+head(water)
+
+# Scatterplot: Mortality vs Hardness
+plot(water$hardness, water$mortality, 
+     main = "Mortality vs Hardness",
+     xlab = "Water Hardness (ppm)", 
+     ylab = "Mortality (per 100,000)",
+     col = "blue", pch = 19)
+
+# Fit Linear Regression Model
+model <- lm(mortality ~ hardness, data = water)
+abline(model, col = "red")
+
+# Predict mortality for hardness = 88 ppm
+predicted_mortality <- predict(model, data.frame(hardness = 88))
+print(paste("Predicted mortality for hardness = 88 ppm:", round(predicted_mortality, 2)))
+
