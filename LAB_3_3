@@ -1,0 +1,24 @@
+# Load required libraries
+install.packages("e1071")
+install.packages("caTools")
+library(e1071)
+library(caTools)
+
+# Load Diabetes Dataset
+df <- read.csv("diabetes.csv")
+
+# Train-Test Split (80-20)
+set.seed(42)
+split <- sample.split(df$Outcome, SplitRatio = 0.8)
+train_data <- subset(df, split == TRUE)
+test_data <- subset(df, split == FALSE)
+
+# Train Naïve Bayes Model
+nb_model <- naiveBayes(Outcome ~ ., data = train_data)
+
+# Predict on Test Data
+nb_predictions <- predict(nb_model, test_data)
+
+# Accuracy Calculation
+accuracy <- sum(nb_predictions == test_data$Outcome) / nrow(test_data)
+print(paste("Naïve Bayes Accuracy:", round(accuracy * 100, 2), "%"))
