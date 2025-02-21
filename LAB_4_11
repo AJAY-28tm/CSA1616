@@ -1,0 +1,13 @@
+AvgSpeed <- c(78, 81, 82, 74, 83, 82, 77, 80, 70)
+TotalTime <- c(39, 37, 36, 42, 35, 36, 40, 38, 46)
+
+# Calculate Standard Deviation
+sd_avg_speed <- sd(AvgSpeed)
+sd_total_time <- sd(TotalTime)
+
+# Calculate Variance
+var_avg_speed <- var(AvgSpeed)
+var_total_time <- var(TotalTime)
+
+cat("SD of AvgSpeed:", sd_avg_speed, "\nVariance of AvgSpeed:", var_avg_speed)
+cat("SD of TotalTime:", sd_total_time, "\nVariance of TotalTime:", var_total_time)
