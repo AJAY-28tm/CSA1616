@@ -1,0 +1,14 @@
+@relation customers
+
+@attribute Age numeric
+@attribute Salary numeric
+@attribute CreditScore numeric
+@attribute Class {Low, Medium, High}
+
+@data
+28,150000,39,Low
+25,150000,27,Low
+26,160000,42,Medium
+25,160000,40,Medium
+30,170000,64,High
+29,200000,72,High
