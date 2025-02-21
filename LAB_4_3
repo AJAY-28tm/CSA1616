@@ -1,0 +1,23 @@
+# Create accuracy and F1-score comparison
+results <- data.frame(
+  Classifier = c("Naïve Bayes", "SVM"),
+  Accuracy = c(85.3, 90.1),   # Example accuracy values from WEKA
+  F1_Score = c(0.82, 0.88)    # Example F1-score values from WEKA
+)
+
+# Load ggplot2
+library(ggplot2)
+
+# Plot Accuracy Comparison
+ggplot(results, aes(x = Classifier, y = Accuracy, fill = Classifier)) +
+  geom_bar(stat = "identity") +
+  ylim(0, 100) +
+  labs(title = "Accuracy Comparison", y = "Accuracy (%)") +
+  theme_minimal()
+
+# Plot F1-Score Comparison
+ggplot(results, aes(x = Classifier, y = F1_Score, fill = Classifier)) +
+  geom_bar(stat = "identity") +
+  ylim(0, 1) +
+  labs(title = "F1-Score Comparison", y = "F1 Score") +
+  theme_minimal()
