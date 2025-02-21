@@ -1,0 +1,38 @@
+# Load required library
+library(ggplot2)
+
+# Step 1: Creating the Dataset
+persons <- data.frame(
+  Name = c("Gopu", "Babu", "Baby", "Gopal", "Krishna", "Jai", "Dev", "Malini", "Hema", "Anu"),
+  Vegetarian = c("Yes", "Yes", "Yes", "No", "Yes", "No", "No", "Yes", "Yes", "Yes")
+)
+
+# Step 2: Count the Number of Vegetarians and Non-Vegetarians
+veg_count <- sum(persons$Vegetarian == "Yes")
+nonveg_count <- sum(persons$Vegetarian == "No")
+
+# Print the counts
+cat("Total Vegetarians:", veg_count, "\n")
+cat("Total Non-Vegetarians:", nonveg_count, "\n")
+
+# Step 3: Create a Data Frame for Visualization
+counts <- data.frame(
+  Category = c("Vegetarian", "Non-Vegetarian"),
+  Count = c(veg_count, nonveg_count)
+)
+
+# Step 4: Plot the Comparison Using a Bar Chart
+ggplot(counts, aes(x = Category, y = Count, fill = Category)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Vegetarian vs. Non-Vegetarian Count", x = "Category", y = "Count") +
+  theme_minimal() +
+  scale_fill_manual(values = c("green", "red"))
+
+# Step 5: Finding the Majority Category
+if (veg_count > nonveg_count) {
+  cat("More people are vegetarians.\n")
+} else if (veg_count < nonveg_count) {
+  cat("More people are non-vegetarians.\n")
+} else {
+  cat("Equal number of vegetarians and non-vegetarians.\n")
+}
