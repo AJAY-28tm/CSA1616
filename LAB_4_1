@@ -1,0 +1,28 @@
+# Load necessary libraries
+library(ggplot2)
+library(cluster)
+
+# Create a sample dataset
+customer_data <- data.frame(
+  CustomerID = c(111, 222, 333, 444, 555, 666),
+  Gender = c("Male", "Male", "Female", "Female", "Female", "Male"),
+  Age = c(28, 25, 26, 25, 30, 29),
+  AnnualIncome = c(150000, 150000, 160000, 160000, 170000, 200000),
+  SpendingScore = c(39, 27, 42, 40, 64, 72)
+)
+
+# Convert categorical data to numerical
+customer_data$Gender <- as.numeric(factor(customer_data$Gender))
+
+# Apply K-Means clustering
+set.seed(123)
+kmeans_result <- kmeans(customer_data[, c("AnnualIncome", "SpendingScore")], centers = 5)
+
+# Add cluster results to dataset
+customer_data$Cluster <- as.factor(kmeans_result$cluster)
+
+# Plot Clustering Results
+ggplot(customer_data, aes(x = AnnualIncome, y = SpendingScore, color = Cluster)) +
+  geom_point(size = 5) +
+  labs(title = "Customer Segmentation using K-Means", x = "Annual Income", y = "Spending Score") +
+  theme_minimal()
