@@ -1,0 +1,15 @@
+data <- c(100, 70, 60, 90, 90)
+
+# (a) Min-Max Normalization
+min_max_norm <- (data - min(data)) / (max(data) - min(data))
+
+# (b) Z-score Normalization
+z_norm <- scale(data)
+
+# (c) Z-score using Mean Absolute Deviation
+mad_norm <- (data - mean(data)) / mad(data)
+
+# (d) Decimal Scaling
+decimal_norm <- data / 10^ceiling(log10(max(data)))
+
+cat("Min-Max:", min_max_norm, "\nZ-score:", z_norm, "\nMAD Z-score:", mad_norm, "\nDecimal Scaling:", decimal_norm)
