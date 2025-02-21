@@ -1,0 +1,17 @@
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+from sklearn.tree import plot_tree
+
+# Train Decision Tree
+dt_model = DecisionTreeClassifier(criterion="entropy", max_depth=3)
+dt_model.fit(X_train, y_train)
+
+# Predictions
+y_pred_dt = dt_model.predict(X_test)
+dt_accuracy = accuracy_score(y_test, y_pred_dt)
+print("Decision Tree Accuracy:", dt_accuracy)
+
+# Plot Tree
+plt.figure(figsize=(10, 6))
+plot_tree(dt_model, feature_names=X.columns, class_names=["No Diabetes", "Diabetes"], filled=True)
+plt.show()
