@@ -1,0 +1,14 @@
+@relation students
+
+@attribute Age numeric
+@attribute Income {Low, Medium, High}
+@attribute Student {Yes, No}
+@attribute Credit_Rating {Fair, Excellent}
+@attribute Buys_Computer {Yes, No}
+
+@data
+25,High,No,Fair,No
+30,Medium,Yes,Excellent,Yes
+35,Low,No,Fair,No
+40,Medium,No,Excellent,No
+20,Low,Yes,Fair,Yes
