@@ -1,0 +1,27 @@
+library(ggplot2)
+
+marks <- c(55, 60, 71, 63, 55, 65, 50, 55, 58, 59, 61, 63, 65, 67, 71, 72, 75)
+
+# Split into 3 bins with equal frequency
+equal_freq_bins <- cut(marks, breaks=quantile(marks, probs=seq(0,1,length=4)), include.lowest=TRUE)
+
+# Plot histogram
+ggplot(data.frame(marks), aes(x=marks)) +
+  geom_histogram(bins=5, fill="blue", alpha=0.6) +
+  ggtitle("Equal-Frequency Partitioning")
+# Define bin width
+equal_width_bins <- cut(marks, breaks=3, include.lowest=TRUE)
+
+# Plot histogram
+ggplot(data.frame(marks), aes(x=marks)) +
+  geom_histogram(bins=3, fill="red", alpha=0.6) +
+  ggtitle("Equal-Width Partitioning")
+set.seed(123)
+kmeans_result <- kmeans(marks, centers=3)
+
+# Assign colors to clusters
+colors <- c("blue", "red", "green")
+
+plot(marks, col=colors[kmeans_result$cluster], pch=19, main="K-Means Clustering of Marks")
+
+
